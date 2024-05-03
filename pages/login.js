@@ -1,15 +1,13 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setToken } from '../redux/reducers/authSlice';
-// import request from "@/components/request";
 
 const Login = () => {
     const router = useRouter();
     const dispatch = useDispatch();
-
     const [showPass, setShowPass] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -53,12 +51,11 @@ const Login = () => {
                 });
                 const data = await response.json();
                 if (response.ok && data.token) {
-                    console.log(data.token)
                     dispatch(setToken(data.token));
                     localStorage.setItem('token', data.token);
                     router.push('/dashboard');
                 } else {
-                    alert('Invalid username or password');   
+                    alert('Invalid username or password');
                 }
             } catch (error) {
                 console.error('An error occurred:', error);
@@ -78,7 +75,7 @@ const Login = () => {
             <div className="login_container">
                 <div className="login_inner">
                     <Image
-                     priority="true"
+                        priority="true"
                         className="login_img"
                         src="/images/logo.png"
                         alt="Example Image"
@@ -91,44 +88,47 @@ const Login = () => {
                         knowledgeable tax experts in the industry.
                     </div>
                     <div className="login_form">
-                        <div className={!errors.email ? 'form_block' : 'form_block has_error'}>
-                            <div className="login_label">Email address</div>
-                            <input
-                                className='form_input'
-                                placeholder="Email address"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <p className='form_error'>{errors.email}</p>
-                        </div>
-                        <div className={!errors.password ? 'form_block' : 'form_block has_error'}>
-                            <div className="login_label">Password</div>
-                            <input
-                                className='form_input'
-                                placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                type={showPass ? 'text' : 'password'}
-                            />
-                            <a href="/#"
-                                className="icon-showPass switch_pass"
-                                onClick={(e) => handleShowPass(e)}
-                            > </a>
-                            <p className='form_error'>{errors.password}</p>
-                        </div>
-                        <div className='remember_line'>
-                            <input type="checkbox" id="remember_me" />
-                            <label htmlFor="remember_me">Remember me</label>
-                            <a href="/#" className="forgot_pass">Forgot Password?</a>
-                        </div>
-                        <button
-                            className='submit_btn'
-                            style={{ opacity: isFormValid ? 1 : 0.5 }}
-                            disabled={!isFormValid}
-                            onClick={handleSubmit}
-                        >
-                            Submit
-                        </button>
+                        <form action="">
+                            <div className={!errors.email ? 'form_block' : 'form_block has_error'}>
+                                <div className="login_label">Email address</div>
+                                <input
+                                    className='form_input'
+                                    placeholder="Email address"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <p className='form_error'>{email !== '' && errors.email}</p>
+                            </div>
+                            <div className={!errors.password ? 'form_block' : 'form_block has_error'}>
+                                <div className="login_label">Password</div>
+                                <input
+                                    className='form_input'
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    type={showPass ? 'text' : 'password'}
+                                />
+                                <a href="/#"
+                                    className="icon-showPass switch_pass"
+                                    onClick={(e) => handleShowPass(e)}
+                                > </a>
+                                <p className='form_error'>{password !== '' && errors.password}</p>
+                            </div>
+                            <div className='remember_line'>
+                                <input type="checkbox" id="remember_me" />
+                                <label htmlFor="remember_me">Remember me</label>
+                                <a href="/#" className="forgot_pass">Forgot Password?</a>
+                            </div>
+                            <button
+                                type="submit"
+                                className='submit_btn'
+                                style={{ opacity: isFormValid ? 1 : 0.5 }}
+                                disabled={!isFormValid}
+                                onClick={handleSubmit}
+                            >
+                                Log In
+                            </button>
+                        </form>
                         <div className="login_links">
                             By logging in, you agree to our <a href="/#">Privacy Policy</a> and  <a href="/#">Terms of Use</a>
                         </div>
