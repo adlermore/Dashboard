@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from '../redux/reducers/counter';
 import Login from './login';
 import Footer from '@/components/Footer';
 
@@ -11,18 +8,6 @@ import Footer from '@/components/Footer';
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-
-  const count = useSelector((state) => state.counter.value);
-  const dispatch = useDispatch();
-
-  const handleIncrement = () => {
-    dispatch(increment());
-  };
-
-  const handleDecrement = () => {
-    dispatch(decrement());
-  };
-
 
   return (
     <div className={inter.className}>
@@ -32,15 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main >
-
-        {/* <p>Redux toolkit Connection Test</p>
-        <div>
-          <h1>Counter: {count}</h1>
-          <button onClick={handleIncrement}>Increment</button>
-          <button onClick={handleDecrement}>Decrement</button>
-        </div> */}
         <Login />
       </main>
       <Footer />

@@ -3,9 +3,13 @@ import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { setToken } from '../redux/reducers/authSlice';
+// import request from "@/components/request";
 
 const Login = () => {
     const router = useRouter();
+    const dispatch = useDispatch();
+
     const [showPass, setShowPass] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,9 +42,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (isFormValid) {
-            console.log('Form submitted successfully!');
             try {
                 const response = await fetch('https://api.2290onlineform.com/api/manageUser/login', {
                     method: 'POST',
@@ -49,16 +51,18 @@ const Login = () => {
                     },
                     body: JSON.stringify({ email, password }),
                 });
-                if (response.ok) {
-                    console.log(response)
+                const data = await response.json();
+                if (response.ok && data.token) {
+                    console.log(data.token)
+                    dispatch(setToken(data.token));
+                    localStorage.setItem('token', data.token);
                     router.push('/dashboard');
                 } else {
-                    alert('Invalid username or password');
+                    alert('Invalid username or password');   
                 }
             } catch (error) {
                 console.error('An error occurred:', error);
             }
-
         } else {
             console.log('Form has errors. Please correct them.');
         }
@@ -66,7 +70,7 @@ const Login = () => {
 
     const handleShowPass = (e) => {
         e.preventDefault();
-        setShowPass(!showPass)
+        setShowPass(!showPass);
     }
 
     return (
@@ -74,6 +78,7 @@ const Login = () => {
             <div className="login_container">
                 <div className="login_inner">
                     <Image
+                     priority="true"
                         className="login_img"
                         src="/images/logo.png"
                         alt="Example Image"
