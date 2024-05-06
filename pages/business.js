@@ -42,27 +42,26 @@ export default function business() {
                 <div className='dashboard_menu'>
                     <div className='menu_inner'>
                         <a className='dashboard_link icon-link1 '
-                            href="#"
+                            href="/#"
                             onClick={(e) => changeActiveLink(e, 'dashboard')}
                         >
                             Dashboard
                         </a>
                         <a className='dashboard_link icon-work active_link'
-                            href="#"
+                            href="/#"
                             onClick={(e) => changeActiveLink(e, 'business')}
                         >
                             Business
                         </a>
                         <a className='dashboard_link icon-list'
-                            href="#"
-                        // onClick={(e) => changeActiveLink(e, 'UpdateInfo')}
+                            href="/#"
                         >
                             Update Info
                         </a>
-                        <a className='dashboard_link icon-userCirlcle' href="#">My Profile</a>
+                        <a className='dashboard_link icon-userCirlcle' href="/#">My Profile</a>
                     </div>
                     <div className="menu_bottom">
-                        <a href="#" className='inner_link icon-comment'>About 2290 Online Form</a>
+                        <a href="/#" className='inner_link icon-comment'>About 2290 Online Form</a>
                     </div>
                 </div>
                 <div className="buissness_table">
@@ -72,7 +71,7 @@ export default function business() {
                             <div className="table_header">
                                 <div className="inner_line">
                                     <div className="list_title icon-work">List of Businesses</div>
-                                    <a href="#/" className="add_buissnes_btn icon-plus">Add new Business</a>
+                                    <a href="/#" className="add_buissnes_btn icon-plus">Add new Business</a>
                                 </div>
                             </div>
                             <div className="table_content">

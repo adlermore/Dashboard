@@ -19,7 +19,19 @@ export default function Header() {
             router.push('/');
         }
         fetchData(token);
+
+        const handleBodyClick = () => {
+            setOpen(false)
+        };
+
+        document.body.addEventListener('click', handleBodyClick);
+
+        return () => {
+            document.body.removeEventListener('click', handleBodyClick);
+        };
+
     }, []);
+
 
     const handleLogOut = (e) => {
         e.preventDefault();
@@ -56,14 +68,14 @@ export default function Header() {
                     </a>
                 </div>
                 <div className="user_wrapper">
-                    <div className="user_info">
+                    <div className="user_info" onClick={(e) => e.stopPropagation()} >
                         <div className="user_name icon-userCirlcle">{userData && userData.username}</div>
-                        <Hamburger rounded toggled={isOpen} toggle={setOpen} color="#F59720" />
+                        <Hamburger  rounded toggled={isOpen} toggle={setOpen} color="#F59720" />
                     </div>
                 </div>
             </div>
             <div className={isOpen ? 'header_menu opened' : `header_menu`}>
-                <div className="menu_inner">
+                <div className="menu_inner" onClick={(e) => e.stopPropagation()}>
                     <a href="tel:+8005306774" className='menu_link link-call icon-operator'>{userData && userData.phoneNumber}</a>
                     <a href="mailto: name@email.com" className='menu_link link-message icon-message'>{userData && userData.email}</a>
                     <a href="mailto: name@email.com" className='menu_link icon-global'>English Spanish</a>

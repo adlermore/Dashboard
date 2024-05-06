@@ -1,0 +1,113 @@
+.header {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  min-height: 120px;
+  box-shadow: 0 4px 4px rgba(0, 12, 51, 0.25);
+  display: flex;
+  align-items: center;
+  background: rgb(234 240 247);
+
+  .header_logo {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    transition: 0.3s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .custom_container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: none;
+  }
+
+  .user_wrapper {
+    margin-left: auto;
+  }
+
+  .user_info {
+    display: flex;
+    align-items: center;
+  }
+
+  .user_name {
+    font-size: 24px;
+    color: rgba(11, 71, 119, 0.8);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    font-family: $medium !important;
+    &:before {
+      font-size: 50px;
+      margin-right: 10px;
+      font-family: 'icomoon';
+    }
+  }
+
+  .hamburger-react {
+    margin-left: 15px;
+    color: rgba(245, 151, 32, 1) !important;
+  }
+
+  .header_menu {
+    position: absolute;
+    width: 278px;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #FFBF00;
+    padding: 20px;
+    transition: 0.5s;
+    z-index: 99;
+    border-radius: 10px;
+    right: -300px;
+
+    &.opened {
+      right: 0;
+    }
+  }
+
+  .menu_inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    display: flex;
+    color: #000C33;
+    transition: 0.3s;
+    font-family: $regular !important;
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:before {
+      color: #FFBF00;
+      font-size: 24px;
+      display: block;
+      font-family: 'icomoon';
+      margin-right: 10px;
+    }
+
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    align-items:center;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .link-call::before {
+    font-size: 26px !important;
+  }
+
+  .link-message::before {
+    font-size: 20px !important;
+  }
+}

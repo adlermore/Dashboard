@@ -37,27 +37,26 @@ export default function Dashboard() {
                 <div className='dashboard_menu'>
                     <div className='menu_inner'>
                         <a className={activeLink !== 'dashboard' ? 'dashboard_link icon-link1' : 'dashboard_link icon-link1 active_link'}
-                            href="#"
+                            href="/#"
                             onClick={(e) => changeActiveLink(e, 'dashboard')}
                         >
                             Dashboard
                         </a>
                         <a className={activeLink !== 'business' ? 'dashboard_link icon-work' : 'dashboard_link icon-work active_link'}
-                            href="#"
+                            href="/#"
                             onClick={(e) => changeActiveLink(e, 'business')}
                         >
                             Business
                         </a>
                         <a className={activeLink !== 'UpdateInfo' ? 'dashboard_link icon-list' : 'dashboard_link icon-list active_link'}
-                            href="#"
-                        // onClick={(e) => changeActiveLink(e, 'UpdateInfo')}
+                            href="/#"
                         >
                             Update Info
                         </a>
                         <a className={activeLink !== 'dashboard3' ? 'dashboard_link icon-userCirlcle' : 'dashboard_link userCirlcle active_link'} href="#">My Profile</a>
                     </div>
                     <div className="menu_bottom">
-                        <a href="#" className='inner_link icon-comment'>About 2290 Online Form</a>
+                        <a href="/#" className='inner_link icon-comment'>About 2290 Online Form</a>
                     </div>
                 </div>
                 {activeLink == 'dashboard' &&

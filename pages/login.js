@@ -1,70 +1,43 @@
-
+import React, { useState } from 'react';
 import Image from "next/image";
-import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { setToken } from '../redux/reducers/authSlice';
+import { useForm } from "react-hook-form";
 
 const Login = () => {
     const router = useRouter();
     const dispatch = useDispatch();
+
     const [showPass, setShowPass] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false);
+    
+    const { register: login, handleSubmit: handleSubmitForm, formState: { errors: errorsLogin } } = useForm({
+        shouldFocusError: false,
+    });
 
-    useEffect(() => {
-        validateForm();
-    }, [email, password]);
-
-    const validateForm = () => {
-        let errors = {};
-        if (!email) {
-            errors.email = 'Email is required.';
-        } else if (!/\S+@\S+\.\S+/.test(email)) {
-            errors.email = 'Email is invalid.';
-        }
-        if (!password) {
-            errors.password = 'Password is required.';
-        } else if (password.length < 6) {
-            errors.password = 'Password must be at least 6 characters.';
-        }
-        setErrors(errors);
-        if (errors.email || errors.password) {
-            setIsFormValid(false);
-        } else {
-            setIsFormValid(true);
-        }
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (isFormValid) {
-            try {
-                const response = await fetch('https://api.2290onlineform.com/api/manageUser/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
-                const data = await response.json();
-                if (response.ok && data.token) {
-                    dispatch(setToken(data.token));
-                    localStorage.setItem('token', data.token);
-                    router.push('/dashboard');
-                } else {
-                    alert('Invalid username or password');
-                }
-            } catch (error) {
-                console.error('An error occurred:', error);
+    const onLoginSubmit = async (dataForm) => {
+        console.log('success !', dataForm);
+        try {
+            const response = await fetch('https://api.2290onlineform.com/api/manageUser/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataForm),
+            });
+            const data = await response.json();
+            if (response.ok && data.token) {
+                dispatch(setToken(data.token));
+                localStorage.setItem('token', data.token);
+                router.push('/dashboard');
+            } else {
+                alert('Invalid username or password');
             }
-        } else {
-            console.log('Form has errors. Please correct them.');
+        } catch (error) {
+            console.error('An error occurred:', error);
         }
     };
-
+ 
     const handleShowPass = (e) => {
         e.preventDefault();
         setShowPass(!showPass);
@@ -88,32 +61,23 @@ const Login = () => {
                         knowledgeable tax experts in the industry.
                     </div>
                     <div className="login_form">
-                        <form action="">
-                            <div className={!errors.email ? 'form_block' : 'form_block has_error'}>
+                        <form onSubmit={handleSubmitForm(onLoginSubmit)}>
+                            <div className={errorsLogin?.email?.type === "required" || errorsLogin?.email?.type === "pattern" ? "form_block has_error" : "form_block"}  >
                                 <div className="login_label">Email address</div>
-                                <input
-                                    className='form_input'
-                                    placeholder="Email address"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                                <p className='form_error'>{email !== '' && errors.email}</p>
+                                <input placeholder="Email" className="form_input" name="email" {...login("email", { required: true, pattern: /^\S+@\S+$/i })} />
+                                {errorsLogin?.email?.type === "pattern" ? <p className="form_error email-info" >invalid Email</p> :
+                                    <p className="form_error" >This field is required</p>}
                             </div>
-                            <div className={!errors.password ? 'form_block' : 'form_block has_error'}>
+                            <div className={errorsLogin?.password?.type === "required" ? "form_block has_error" : "form_block"}  >
                                 <div className="login_label">Password</div>
-                                <input
-                                    className='form_input'
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    type={showPass ? 'text' : 'password'}
-                                />
+                                <input   type={showPass ? 'text' : 'password'} placeholder="Password" autoComplete="on" className="form-control" name="password" {...login("password", { required: true })} />
                                 <a href="/#"
                                     className="icon-showPass switch_pass"
                                     onClick={(e) => handleShowPass(e)}
                                 > </a>
-                                <p className='form_error'>{password !== '' && errors.password}</p>
+                                <p className="form_error" >This field is required</p>
                             </div>
+
                             <div className='remember_line'>
                                 <input type="checkbox" id="remember_me" />
                                 <label htmlFor="remember_me">Remember me</label>
@@ -122,9 +86,6 @@ const Login = () => {
                             <button
                                 type="submit"
                                 className='submit_btn'
-                                style={{ opacity: isFormValid ? 1 : 0.5 }}
-                                disabled={!isFormValid}
-                                onClick={handleSubmit}
                             >
                                 Log In
                             </button>

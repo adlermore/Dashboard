@@ -136,7 +136,7 @@ export default function updateInfo() {
         })
             .then((data) => {
                 console.log(data)
-                alert('success ✅')
+                router.push(`/business`);
             })
             .catch(error => {
                 console.log(error);
@@ -204,7 +204,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Business Name <span>*</span>  <span className="warning icon-warning"></span> </div>
                                                         <input type="text" placeholder="Business Name"
-                                                            defaultValue={infoData.name}
                                                             value={infoData.name}
                                                             name='name'
                                                             onChange={handleInputChange}
@@ -220,7 +219,10 @@ export default function updateInfo() {
                                                             </label>
                                                             <p className="switch_text"> Same as Business name</p>
                                                         </div>
-                                                        <input type="text" placeholder="Business Name" name='dba' defaultValue={infoData.dba} className={switchName ? 'disabled switch_input' : 'switch_input'} value={switchName ? infoData.name : ''} onChange={handleInputChange} />
+                                                        <input type="text" placeholder="Business Name" name='dba'
+                                                            className={switchName ? 'disabled switch_input' : 'switch_input'}
+                                                            value={switchName ? infoData.name : infoData.dba} onChange={handleInputChange}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="image_block">
@@ -232,9 +234,9 @@ export default function updateInfo() {
                                                             priority="true"
                                                             className="login_img"
                                                             src="/images/infoImg.png"
-                                                            // src={infoData.signature}
                                                             alt="Example Image"
-                                                            layout='fill'
+                                                            fill
+                                                            sizes="100% 100%"
                                                         />
                                                     </div>
                                                 </div>
@@ -244,7 +246,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">EIN <span>*</span></div>
                                                         <input type="text"
-                                                            defaultValue={infoData.ein}
                                                             value={infoData.ein}
                                                             name='ein'
                                                             onChange={handleInputChange}
@@ -253,7 +254,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Confirm EIN <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.ein}
                                                             value={infoData.ein}
                                                             name='ein'
                                                             onChange={handleInputChange}
@@ -262,7 +262,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Address <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.address}
                                                             value={infoData.address}
                                                             name='address'
                                                             onChange={handleInputChange}
@@ -271,7 +270,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">City <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.city}
                                                             value={infoData.city}
                                                             name='city'
                                                             onChange={handleInputChange}
@@ -300,7 +298,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Zip Cpde <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.zip}
                                                             value={infoData.zip}
                                                             name='zip'
                                                             onChange={handleInputChange}
@@ -309,7 +306,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Fax Number <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.faxNumber}
                                                             value={infoData.faxNumber}
                                                             name='faxNumber'
                                                             onChange={handleInputChange} />
@@ -317,7 +313,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Email Address <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.email}
                                                             value={infoData.email}
                                                             name='email'
                                                             onChange={handleInputChange}
@@ -326,7 +321,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Phone Number <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.phoneNumber}
                                                             value={infoData.phoneNumber}
                                                             name='phoneNumber'
                                                             onChange={handleInputChange}
@@ -335,19 +329,21 @@ export default function updateInfo() {
                                                     <div className="input_block textarea">
                                                         <div className="input_label">Signature  <span>*</span></div>
                                                         <div type="text" className='image_wrapper'>
-                                                            <Image
-                                                                priority="true"
-                                                                className="login_img"
-                                                                src={infoData.signature}
-                                                                alt="Example Image"
-                                                                layout='fill'
-                                                            />
+                                                            {infoData.signature &&
+                                                                <Image
+                                                                    priority="true"
+                                                                    className="login_img"
+                                                                    src={infoData.signature}
+                                                                    alt="Example Image"
+                                                                    fill
+                                                                    sizes="100% 100%"
+                                                                />
+                                                            }
                                                         </div>
                                                     </div>
                                                     <div className="input_block">
                                                         <div className="input_label">Name <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.authorName}
                                                             value={infoData.authorName}
                                                             name='authorName'
                                                             onChange={handleInputChange}
@@ -356,7 +352,6 @@ export default function updateInfo() {
                                                     <div className="input_block">
                                                         <div className="input_label">Date <span>*</span></div>
                                                         <input type="text" placeholder=""
-                                                            defaultValue={infoData.authorDate}
                                                             value={infoData.authorDate}
                                                             name='authorDate'
                                                             onChange={handleInputChange}
@@ -373,14 +368,14 @@ export default function updateInfo() {
 
                                                             <p className="switch_text"> Same as Phone </p>
                                                         </div>
-                                                        <input type="text" placeholder="" value={switchPhone ? infoData.phoneNumber : infoData.mobileNumber} className={switchPhone ? 'disabled switch_input' : 'switch_input'} onChange={handleInputChange} name='phoneNumber' />
+                                                        <input type="text" placeholder="" value={switchPhone ? infoData.phoneNumber : infoData.mobileNumber} className={switchPhone ? 'disabled switch_input' : 'switch_input'} onChange={handleInputChange} name='mobileNumber' />
                                                     </div>
                                                     <div className="input_block">
                                                         <button type="button" className="">Clear Signature</button>
                                                     </div>
                                                     <div className="input_block"></div>
                                                     <div className="input_block">
-                                                        <Link className='site_btn' href={'/dashboard'}>Cancel</Link>
+                                                        <Link className='site_btn' href='/dashboard'>Cancel</Link>
                                                     </div>
                                                     <div className="input_block">
                                                         <button type="button" className="save" onClick={handlePostData} >Save and update</button>

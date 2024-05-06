@@ -1,112 +1,6 @@
-@font-face {
-  font-family: "UbuntuRegular";
-  src: local("UbuntuRegular"),
-    url("/fonts/ubuntu/Ubuntu-Regular.ttf") format("truetype");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "UbuntuMedium";
-  src: local("UbuntuMedium"),
-    url("/fonts/ubuntu/Ubuntu-Medium.ttf") format("truetype");
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "UbuntuBold";
-  src: local("UbuntuBold"),
-    url("/fonts/ubuntu/Ubuntu-Bold.ttf") format("truetype");
-  font-weight: 700;
-}
-
-$regular: "UbuntuRegular";
-$medium: "UbuntuMedium";
-$bold: "UbuntuBold";
-
-@font-face {
-  font-family: 'icomoon';
-  src: url('/fonts/icomoon.eot?w8q7iv');
-  src: url('/fonts/icomoon.eot?w8q7iv#iefix') format('embedded-opentype'),
-    url('/fonts/icomoon.ttf?w8q7iv') format('truetype'),
-    url('/fonts/icomoon.woff?w8q7iv') format('woff'),
-    url('/fonts/icomoon.svg?w8q7iv#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
-
-[class^="icon-"],
-[class*=" icon-"] {
-  font-family: 'icomoon' !important;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-link1:before {
-  content: "\e901";
-}
-
-.icon-calendar:before {
-  content: "\e903";
-}
-
-.icon-global:before {
-  content: "\e904";
-}
-
-.icon-message:before {
-  content: "\e905";
-}
-
-.icon-operator:before {
-  content: "\e906";
-}
-
-.icon-user:before {
-  content: "\e907";
-}
-
-.icon-warning:before {
-  content: "\e908";
-}
-
-.icon-work:before {
-  content: "\e909";
-}
-
-.icon-plus:before {
-  content: "\e90a";
-}
-
-.icon-edit:before {
-  content: "\e90b";
-}
-
-.icon-comment:before {
-  content: "\e90d";
-}
-
-.icon-arrow:before {
-  content: "\e90e";
-}
-
-.icon-userCirlcle:before {
-  content: "\e910";
-}
-
-.icon-list:before {
-  content: "\e911";
-}
-
-.icon-showPass:before {
-  content: "\e900";
-}
+@import "./fonts.scss";
+@import "./footer.scss";
+@import "./header.scss";
 
 * {
   box-sizing: border-box;
@@ -150,7 +44,6 @@ body {
 .main_content {
   height: 100%;
   display: flex;
-
 }
 
 .dashboard_container {
@@ -169,35 +62,6 @@ a {
   padding: 0 20px;
 }
 
-.footer {
-  width: 100%;
-  background: rgba(11, 71, 119, 1);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-shadow: 10px 4px 10 0 rgba(51, 154, 240, 0.2);
-
-  .custom_container {
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
-  
-  .footer_links {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-
-    a {
-      color: rgba(0, 117, 255, 1);
-      padding-left: 5px;
-      padding-right: 5px;
-      border-left: 1px solid #fff;
-    }
-  }
-}
 .main_content {
   .footer_links a{ 
     color: rgba(245, 151, 32, 1);
@@ -286,19 +150,22 @@ a {
     position: absolute;
     right: 0;
     bottom: -20px;
-    /* opacity: 0; */
+    opacity: 0;
+    transition: 0.3s;
   }
+  .has_error {
+    input {
+      border: 1px solid rgba(172, 29, 29, 0.637);
+    }
+    .form_error {
+      opacity: 1;
+    }
+  } 
 
   .form_block {
     width: 100%;
     margin-bottom: 38px;
     position: relative;
-
-    &.has_error {
-      input {
-        border: 1px solid rgba(172, 29, 29, 0.637);
-      }
-    }
   }
 
   .switch_pass {
@@ -385,120 +252,6 @@ a {
     padding: 0 5px;
     font-weight: 700;
     color: rgba(11, 71, 119, 1);
-  }
-}
-
-.header {
-  position: relative;
-  width: 100%;
-  height: 120px;
-  min-height: 120px;
-  box-shadow: 0 4px 4px rgba(0, 12, 51, 0.25);
-  display: flex;
-  align-items: center;
-  background: rgb(234 240 247);
-
-  .header_logo {
-    display: flex;
-    align-items: center;
-    margin-left: 30px;
-    transition: 0.3s;
-
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-
-  .custom_container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: none;
-  }
-
-  .user_wrapper {
-    margin-left: auto;
-  }
-
-  .user_info {
-    display: flex;
-    align-items: center;
-  }
-
-  .user_name {
-    font-size: 24px;
-    color: rgba(11, 71, 119, 0.8);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    font-family: $medium !important;
-    &:before {
-      font-size: 50px;
-      margin-right: 10px;
-      font-family: 'icomoon';
-    }
-  }
-
-  .hamburger-react {
-    margin-left: 15px;
-    color: rgba(245, 151, 32, 1) !important;
-  }
-
-  .header_menu {
-    position: absolute;
-    width: 278px;
-    top: 100%;
-    background: #fff;
-    border: 1px solid #FFBF00;
-    padding: 20px;
-    transition: 0.5s;
-    z-index: 99;
-    border-radius: 10px;
-    right: -300px;
-
-    &.opened {
-      right: 0;
-    }
-  }
-
-  .menu_inner {
-    display: flex;
-    flex-direction: column;
-  }
-
-  a {
-    display: flex;
-    color: #000C33;
-    transition: 0.3s;
-    font-family: $regular !important;
-    &:hover {
-      opacity: 0.7;
-    }
-
-    &:before {
-      color: #FFBF00;
-      font-size: 24px;
-      display: block;
-      font-family: 'icomoon';
-      margin-right: 10px;
-    }
-
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 20px;
-    align-items:center;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .link-call::before {
-    font-size: 26px !important;
-  }
-
-  .link-message::before {
-    font-size: 20px !important;
   }
 }
 
@@ -621,7 +374,6 @@ a {
           width: 160px;
           border-radius: 15px;
           justify-content: flex-start;
-          /* padding-left: 15px; */
         }
       }
     }
@@ -661,10 +413,8 @@ a {
       transition: 0.3s;
       left: -40px;
       position: absolute;
-      /* background: #fff; */
       align-items: center;
       justify-content: center;
-      /* box-shadow: 0 4px 4px rgba(0, 12, 51, 0.25); */
       color: rgba(245, 151, 32, 1);
       z-index: 9;
       font-size: 50px;
@@ -679,7 +429,6 @@ a {
       right: 0;
       top: 0;
       border-radius: 7px;
-
       bottom: 0;
       width: 100%;
       height: 100%;
@@ -718,7 +467,6 @@ a {
       align-items: center;
       padding-left: 5px;
       z-index: -1;
-      /* justify-content: center; */
       color: #fff;
       font-size: 14px;
       margin-right: 15px;
@@ -1275,7 +1023,6 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
