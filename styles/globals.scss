@@ -748,7 +748,7 @@ a {
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -770,6 +770,7 @@ a {
     overflow: hidden;
     flex:1;
     border:1px solid rgba(245, 151, 32, 1);
+    border-radius: 0 0 5px 5px;
   }
 }
 .switch_input{
